@@ -19,18 +19,18 @@ namespace AutoServiceApi.Controllers
         public AutoservicesController(AutoServiceContext context) => _context = context;
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Autoservice>>> GetAutoServices()
-            => await _context.Autoservices.ToListAsync();
+        public async Task<ActionResult<IEnumerable<AutoService>>> GetAutoServices()
+            => await _context.AutoServices.ToListAsync();
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Autoservice>> GetAutoService(int id)
+        public async Task<ActionResult<AutoService>> GetAutoService(int id)
         {
-            var autoService = await _context.Autoservices.FindAsync(id);
+            var autoService = await _context.AutoServices.FindAsync(id);
             return autoService == null ? NotFound() : autoService;
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAutoService(int id, Autoservice autoService)
+        public async Task<IActionResult> PutAutoService(int id, AutoService autoService)
         {
             if (id != autoService.Id) return BadRequest();
             _context.Entry(autoService).State = EntityState.Modified;

@@ -14,7 +14,7 @@
 
         public int ServiceId { get; set; }
 
-        public Service Service { get; set; } = null!;
+        public ServiceOffer Service { get; set; } = null!;
 
         public AppointmentHistory? History { get; set; }
     }

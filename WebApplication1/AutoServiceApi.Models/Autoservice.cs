@@ -1,6 +1,6 @@
 ﻿namespace WebApplication1.AutoServiceApi.Models
 {
-    public class Autoservice
+    public class AutoService
     {
         public int Id { get; set; }
 

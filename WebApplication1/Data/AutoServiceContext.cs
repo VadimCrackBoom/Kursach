@@ -1,36 +1,32 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApplication1.AutoServiceApi.Models;
 
+
 namespace WebApplication1.Data
 {
     public class AutoServiceContext : DbContext
     {
-        public AutoServiceContext(DbContextOptions<AutoServiceContext> options) : base(options)
-        {
-        }
+        public AutoServiceContext(DbContextOptions<AutoServiceContext> options) 
+            : base(options) { }
 
-        public DbSet<Autoservice> Autoservices { get; set; } = null!;
-        public DbSet<User> Users { get; set; } = null!;
-        public DbSet<Service> Services { get; set; } = null!;
-        public DbSet<Appointment> Appointments { get; set; } = null!;
-        public DbSet<AppointmentHistory> AppointmentHistories { get; set; } = null!;
+        public DbSet<ServiceOffer> ServicesOffers { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<AutoService> AutoServices { get; set; }
+        public DbSet<AppointmentHistory> AppointmentHistories { get; set; }
+        
+        public IQueryable<ServiceOffer> ServiceOffer => ServiceOffer.AsQueryable();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Appointment>()
-                .HasOne(a => a.History)
-                .WithOne(h => h.Appointment)
-                .HasForeignKey<AppointmentHistory>(h => h.AppointmentId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            // Добавим начальные данные
-            modelBuilder.Entity<Autoservice>().HasData(
-                new Autoservice { Id = 1, Name = "Автосервис Косованова", Address = "ул. Примерная, 123", Phone = "+7 (123) 456-78-90" }
+            // Начальные данные
+            modelBuilder.Entity<AutoService>().HasData(
+                new AutoService { Id = 1, Name = "Автосервис", Address = "ул. Примерная, 1", Phone = "+79990001122" }
             );
 
-            modelBuilder.Entity<Service>().HasData(
-                new Service { Id = 1, Name = "Замена масла", Description = "Полная замена моторного масла и фильтра", Price = 2000 },
-                new Service { Id = 2, Name = "Диагностика", Description = "Компьютерная диагностика автомобиля", Price = 1500 }
+            modelBuilder.Entity<ServiceOffer>().HasData(
+                new ServiceOffer() { Id = 1, Name = "Замена масла", Price = 2000 },
+                new ServiceOffer() { Id = 2, Name = "Диагностика", Price = 1500 }
             );
         }
     }
