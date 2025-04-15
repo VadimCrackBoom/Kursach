@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoServiceApi.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.AutoServiceApi.Models;
-using WebApplication1.Data;
 
 namespace AutoServiceApi.Controllers
 {

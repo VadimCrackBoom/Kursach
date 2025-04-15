@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoServiceApi.Models;
+using Microsoft.EntityFrameworkCore;
 using WebApplication1.AutoServiceApi.Models;
 
-
-namespace WebApplication1.Data
+namespace AutoServiceApi.Data
 {
     public class AutoServiceContext : DbContext
     {

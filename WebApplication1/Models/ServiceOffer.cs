@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using AutoServiceApi.Models;
 
 namespace WebApplication1.AutoServiceApi.Models
 {

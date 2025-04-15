@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoServiceApi.Data;
+using AutoServiceApi.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.AutoServiceApi.Models;
-using WebApplication1.Data;
 
 [Route("api/[controller]")]
 [ApiController]

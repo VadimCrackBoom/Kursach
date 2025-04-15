@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.AutoServiceApi.Models
+﻿using WebApplication1.AutoServiceApi.Models;
+
+namespace AutoServiceApi.Models
 {
     public class Appointment
     {

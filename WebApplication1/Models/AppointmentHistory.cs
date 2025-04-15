@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.AutoServiceApi.Models
+﻿using AutoServiceApi.Models;
+
+namespace WebApplication1.AutoServiceApi.Models
 {
     public class AppointmentHistory
     {

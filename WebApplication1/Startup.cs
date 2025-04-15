@@ -1,19 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WebApplication1.Data;
+﻿using AutoServiceApi.Data;
+using Microsoft.EntityFrameworkCore;
 
-public class Startup
+namespace AutoServiceApi;
+
+public class Startup(IConfiguration configuration)
 {
-    public IConfiguration Configuration { get; }
-
-    public Startup(IConfiguration configuration)
-    {
-        Configuration = configuration;
-    }
+    private readonly IConfiguration _configuration = configuration;
 
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddDbContext<AutoServiceContext>(options =>
-            options.UseSqlite("Data Source=autoservice.db"));
+            options.UseSqlite("Data Source=AutoService.db"));
 
         services.AddControllers();
         services.AddSwaggerGen();

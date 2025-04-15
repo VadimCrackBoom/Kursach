@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoServiceApi.Data;
+using AutoServiceApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.AutoServiceApi.Models;
-using WebApplication1.Data;
 
 namespace AutoServiceApi.Controllers
 {
@@ -19,6 +21,7 @@ namespace AutoServiceApi.Controllers
         public UsersController(AutoServiceContext context) => _context = context;
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
             => await _context.Users.ToListAsync();
 
