@@ -1,4 +1,6 @@
-﻿namespace WebApplication1.AutoServiceApi.Models
+﻿using Microsoft.Build.Framework;
+
+namespace WebApplication1.AutoServiceApi.Models
 {
     public class AutoService
     {
@@ -9,5 +11,7 @@
         public string Address { get; set; } = string.Empty;
 
         public string Phone { get; set; } = string.Empty;
+        public TimeSpan OpeningTime { get; set; }
+        public TimeSpan ClosingTime { get; set; }
     }
 }

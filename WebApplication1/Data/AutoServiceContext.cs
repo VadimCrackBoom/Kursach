@@ -15,7 +15,7 @@ namespace AutoServiceApi.Data
         public DbSet<AutoService> AutoServices { get; set; }
         public DbSet<AppointmentHistory> AppointmentHistories { get; set; }
         
-        public IQueryable<ServiceOffer> ServiceOffer => ServiceOffer.AsQueryable();
+        public IQueryable<ServiceOffer> ServiceOffer => ServicesOffers.AsQueryable();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,9 @@ namespace AutoServiceApi.Data
                 new ServiceOffer() { Id = 1, Name = "Замена масла", Price = 2000 },
                 new ServiceOffer() { Id = 2, Name = "Диагностика", Price = 1500 }
             );
+            modelBuilder.Entity<User>().HasKey(u => u.Id);
+            modelBuilder.Entity<Appointment>().HasKey(a => a.Id);
+            modelBuilder.Entity<AppointmentHistory>().HasKey(ah => ah.Id);
         }
     }
 }

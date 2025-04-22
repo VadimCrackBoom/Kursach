@@ -1,4 +1,6 @@
-﻿using AutoServiceApi.Data;
+﻿using AutoMapper;
+using AutoServiceApi.Data;
+using AutoServiceApi.Models.DataTransferObjects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.AutoServiceApi.Models;
@@ -8,22 +10,24 @@ using WebApplication1.AutoServiceApi.Models;
 public class ServiceOfferController : ControllerBase
 {
     private readonly AutoServiceContext _context;
+    private readonly IMapper _mapper;
 
-    public ServiceOfferController(AutoServiceContext context)
+    public ServiceOfferController(AutoServiceContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ServiceOffer>>> GetServiceOffers()
+    public async Task<ActionResult<IEnumerable<ServiceOfferResponseDto>>> GetServiceOffers()
     {
-        return await _context.ServicesOffers.ToListAsync();
+        var offers = await _context.ServicesOffers.ToListAsync();
+        return _mapper.Map<List<ServiceOfferResponseDto>>(offers);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<ServiceOffer>> GetServiceOffer(int id)
+    public async Task<ActionResult<ServiceOfferResponseDto>> GetServiceOffer(int id)
     {
-        // Исправлено: используем FirstOrDefaultAsync вместо FindAsync
         var serviceOffer = await _context.ServicesOffers
             .FirstOrDefaultAsync(s => s.Id == id);
 
@@ -32,31 +36,44 @@ public class ServiceOfferController : ControllerBase
             return NotFound();
         }
 
-        return serviceOffer;
+        return _mapper.Map<ServiceOfferResponseDto>(serviceOffer);
     }
 
     [HttpPost]
-    public async Task<ActionResult<ServiceOffer>> PostServiceOffer(ServiceOffer serviceOffer)
+    public async Task<ActionResult<ServiceOfferResponseDto>> PostServiceOffer(CreateServiceOfferDto createDto)
     {
+        var serviceOffer = _mapper.Map<ServiceOffer>(createDto);
         serviceOffer.CreatedDate = DateTime.UtcNow;
         serviceOffer.LastUpdated = DateTime.UtcNow;
         
         _context.ServicesOffers.Add(serviceOffer);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetServiceOffer), new { id = serviceOffer.Id }, serviceOffer);
+        return CreatedAtAction(nameof(GetServiceOffer), 
+            new { id = serviceOffer.Id }, 
+            _mapper.Map<ServiceOfferResponseDto>(serviceOffer));
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutServiceOffer(int id, ServiceOffer serviceOffer)
+    public async Task<IActionResult> PutServiceOffer(int id, UpdateServiceOfferDto updateDto)
     {
-        if (id != serviceOffer.Id)
+        if (id != updateDto.Id)
         {
             return BadRequest();
         }
 
-        serviceOffer.LastUpdated = DateTime.UtcNow;
-        _context.Entry(serviceOffer).State = EntityState.Modified;
+        var serviceOffer = await _context.ServicesOffers.FindAsync(id);
+        if (serviceOffer == null)
+        {
+            return NotFound();
+        }
+
+        _mapper.Map(updateDto, serviceOffer);
+        
+        if (updateDto.UpdateTimestamp)
+        {
+            serviceOffer.LastUpdated = DateTime.UtcNow;
+        }
 
         try
         {
@@ -94,3 +111,4 @@ public class ServiceOfferController : ControllerBase
         return await _context.ServicesOffers.AnyAsync(e => e.Id == id);
     }
 }
+

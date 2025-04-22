@@ -7,8 +7,9 @@ namespace WebApplication1.AutoServiceApi.Models
     {
         public int Id { get; set; }
     
-        [Microsoft.Build.Framework.Required]
+        
         [StringLength(100)]
+        
         public string Name { get; set; } = string.Empty;
     
         [StringLength(500)]
