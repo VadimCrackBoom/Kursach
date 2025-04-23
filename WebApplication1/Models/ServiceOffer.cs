@@ -7,7 +7,7 @@ namespace WebApplication1.AutoServiceApi.Models
     {
         public int Id { get; set; }
     
-        [Microsoft.Build.Framework.Required]
+        [Required]
         [StringLength(100)]
         public string Name { get; set; } = string.Empty;
     
@@ -17,7 +17,7 @@ namespace WebApplication1.AutoServiceApi.Models
         [Range(0, 100000)]
         public decimal Price { get; set; }
     
-        [Microsoft.Build.Framework.Required]
+        [Required]
         public string Category { get; set; } = "Основные"; // Новое поле
     
         public int DurationMinutes { get; set; } = 60; // Новое поле
