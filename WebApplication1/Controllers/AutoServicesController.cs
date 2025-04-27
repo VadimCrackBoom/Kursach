@@ -69,7 +69,7 @@ public class AutoServicesController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<IActionResult> Create([FromBody] AutoServiceCreateDto createDto)
     {
         try
@@ -94,7 +94,7 @@ public class AutoServicesController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<IActionResult> Update(int id, [FromBody] AutoServiceUpdateDto updateDto)
     {
         try
@@ -117,7 +117,7 @@ public class AutoServicesController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<IActionResult> Delete(int id)
     {
         try

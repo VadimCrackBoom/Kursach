@@ -22,7 +22,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<IActionResult> GetAll()
     {
         try

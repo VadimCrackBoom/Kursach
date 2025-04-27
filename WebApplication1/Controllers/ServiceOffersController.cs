@@ -80,7 +80,7 @@ public class ServiceOffersController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<IActionResult> Create([FromBody] ServiceOfferCreateDto createDto)
     {
         try
@@ -106,7 +106,7 @@ public class ServiceOffersController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<IActionResult> Update(int id, [FromBody] ServiceOfferUpdateDto updateDto)
     {
         try
@@ -129,7 +129,7 @@ public class ServiceOffersController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<IActionResult> Delete(int id)
     {
         try

@@ -4,7 +4,6 @@ namespace WebApplication1.DTOs;
 
 public class ServiceOfferCreateDto
 {
-    public int ServiceOfferId { get; set; }
     [Required] public string Name { get; set; }
     public string? Description { get; set; }
     [Required] public decimal Price { get; set; }

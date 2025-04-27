@@ -21,7 +21,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                .GetBytes(builder.Configuration["Jwt:Secret"])),
+                .GetBytes(builder.Configuration["Jwt:Secret"] ?? string.Empty)),
             ValidateIssuer = false,
             ValidateAudience = false
         };
@@ -84,6 +84,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();

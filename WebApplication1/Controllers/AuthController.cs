@@ -25,9 +25,7 @@ public class AuthController : ControllerBase
         try
         {
             var response = await _authService.Authenticate(loginDto);
-            return response == null 
-                ? Unauthorized() 
-                : Ok(response);
+            return Ok(response);
         }
         catch (Exception ex)
         {

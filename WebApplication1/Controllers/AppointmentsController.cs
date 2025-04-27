@@ -135,7 +135,7 @@ public class AppointmentsController : ControllerBase
     }
 
     [HttpPut("{id}/status")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<IActionResult> UpdateStatus(int id, [FromBody] UpdateAppointmentStatusDto updateDto)
     {
         try
@@ -166,7 +166,7 @@ public class AppointmentsController : ControllerBase
             var appointment = await _context.Appointments.FindAsync(id);
             if (appointment == null) return NotFound();
 
-            // Check if current user owns the appointment or is admin
+            
             if (appointment.UserId != currentUserId && !isAdmin)
                 return Forbid();
 
