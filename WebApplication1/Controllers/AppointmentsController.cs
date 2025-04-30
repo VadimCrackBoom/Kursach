@@ -55,8 +55,8 @@ public class AppointmentsController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting all appointments");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, "Ошибка получения всех записей");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -90,8 +90,8 @@ public class AppointmentsController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error getting appointment with ID {id}");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, $"Ошибка получения записи по ID {id}");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -104,7 +104,7 @@ public class AppointmentsController : ControllerBase
 
             var serviceOffer = await _context.ServiceOffers.FindAsync(createDto.ServiceOfferId);
             if (serviceOffer == null)
-                return BadRequest(new { message = "Invalid service offer ID" });
+                return BadRequest(new { message = "Такого ID автосервиса не существует" });
 
             var appointment = new Appointment
             {
@@ -129,8 +129,8 @@ public class AppointmentsController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error creating appointment");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, "Ошибка создания записи");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -150,8 +150,8 @@ public class AppointmentsController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error updating status for appointment with ID {id}");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, $"Ошибка обновления записи с ID {id}");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 

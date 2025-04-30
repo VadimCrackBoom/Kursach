@@ -39,8 +39,8 @@ public class AutoServicesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting all auto services");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, "Ошибка получения всех автосервисов");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -63,8 +63,8 @@ public class AutoServicesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error getting auto service with ID {id}");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, $"Ошибка получения ID автосервиса {id}");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -88,8 +88,8 @@ public class AutoServicesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error creating auto service");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, "Ошибка создания автосервиса");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -111,8 +111,8 @@ public class AutoServicesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error updating auto service with ID {id}");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, $"Ошибка обновления автосервиса {id}");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 

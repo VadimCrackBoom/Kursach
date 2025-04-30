@@ -74,8 +74,8 @@ public class ServiceOffersController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error getting service offer with ID {id}");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, $"Ошибка получения услуг по ID {id}");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -100,8 +100,8 @@ public class ServiceOffersController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error creating service offer");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, "Ошибка создания услуги");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -123,8 +123,8 @@ public class ServiceOffersController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error updating service offer with ID {id}");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, $"Ошибка обновления услуги по ID {id}");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -144,8 +144,8 @@ public class ServiceOffersController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error deleting service offer with ID {id}");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, $"Ошибка удаления услуги по ID {id}");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 }

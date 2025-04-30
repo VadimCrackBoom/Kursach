@@ -47,8 +47,8 @@ public class AppointmentHistoriesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting all appointment histories");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, "Ошибка получения всей истории");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -75,8 +75,8 @@ public class AppointmentHistoriesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error getting appointment history with ID {id}");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, $"Ошибка получения истории по ID {id}");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 }

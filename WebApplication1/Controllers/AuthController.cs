@@ -22,15 +22,29 @@ public class AuthController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> Login([FromBody] UserLoginDto loginDto)
     {
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage)
+                .ToList();
+            
+            _logger.LogWarning("Ошибки валидации при входе: {Errors}", string.Join(", ", errors));
+            return BadRequest(new { Errors = errors });
+        }
+        
         try
         {
             var response = await _authService.Authenticate(loginDto);
+            if (response == null)
+                return Unauthorized(new { Error = "Неверный email или пароль" });
+
             return Ok(response);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Login error");
-            return StatusCode(500);
+            _logger.LogError(ex, "Ошибка при входе пользователя");
+            return StatusCode(500, new { Error = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -38,6 +52,17 @@ public class AuthController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> Register([FromBody] UserRegisterDto registerDto)
     {
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage)
+                .ToList();
+            
+            _logger.LogWarning("Ошибки валидации при регистрации: {Errors}", string.Join(", ", errors));
+            return BadRequest(new { Errors = errors });
+        }
+        
         try
         {
             var user = await _authService.Register(registerDto);
@@ -51,7 +76,7 @@ public class AuthController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Registration error");
+            _logger.LogError(ex, "Ошибка при регистрации пользователя");
             return BadRequest(ex.Message);
         }
     }

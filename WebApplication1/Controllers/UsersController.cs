@@ -40,8 +40,8 @@ public class UsersController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting all users");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, "Ошибка получения всех пользователей");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -67,8 +67,8 @@ public class UsersController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error getting user with ID {id}");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, $"Ошибка получения пользователя по ID {id}");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 
@@ -94,8 +94,8 @@ public class UsersController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error updating user with ID {id}");
-            return StatusCode(500, new { message = "Internal server error" });
+            _logger.LogError(ex, $"Ошибка обновления пользователя по ID {id}");
+            return StatusCode(500, new { message = "Внутренняя ошибка сервера" });
         }
     }
 }
